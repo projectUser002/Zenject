@@ -1,14 +1,10 @@
-using System;
 using UnityEngine;
 using Zenject;
 
-[RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(Collider2D))]
-public class Bullet : MonoBehaviour, IPoolable<IMemoryPool>
+public class SmartBullet : MonoBehaviour, IPoolable<IMemoryPool>
 {
     [Header("Movement")]
     [SerializeField] private float speed = 10f;
-    [SerializeField] private float damage = 1f;
     [SerializeField] private float rotationSpeed = 5f;
     
     [Header("Targeting")]
@@ -19,39 +15,21 @@ public class Bullet : MonoBehaviour, IPoolable<IMemoryPool>
     private float _lifeTimer;
     private float _lifetime;
     private bool _isActive;
-    private Rigidbody2D _rigidbody;
 
     private Target _target;
     private Transform _player;
     
     private Transform _currentTarget;
     private bool _hasObstacleTarget;
-    
-    public class Factory : PlaceholderFactory<Bullet> { }
-    public class Pool : MonoPoolableMemoryPool<IMemoryPool, Bullet> { }
 
+    public class Factory : PlaceholderFactory<SmartBullet> { }
+    public class Pool : MonoPoolableMemoryPool<IMemoryPool, SmartBullet> { }
+    
     [Inject]
     public void Construct(Target target, PlayerController player)
     {
         _target = target;
         _player = player.transform;
-    }
-    
-    private void Awake()
-    {
-        _rigidbody = GetComponent<Rigidbody2D>();
-        
-        if (_rigidbody != null)
-        {
-            _rigidbody.isKinematic = true;
-            _rigidbody.gravityScale = 0f;
-        }
-
-        var collider = GetComponent<Collider2D>();
-        if (collider != null)
-        {
-            collider.isTrigger = true;
-        }
     }
     
     public void Initialize(float lifetime, IMemoryPool pool)
@@ -60,13 +38,6 @@ public class Bullet : MonoBehaviour, IPoolable<IMemoryPool>
         _pool = pool;
         _lifeTimer = 0f;
         _isActive = true;
-        _hasObstacleTarget = false;
-        
-        var collider = GetComponent<Collider2D>();
-        if (collider != null)
-        {
-            collider.enabled = true;
-        }
         
         FindTarget();
     }
@@ -96,27 +67,20 @@ public class Bullet : MonoBehaviour, IPoolable<IMemoryPool>
             
             _currentTarget = closestObstacle;
             _hasObstacleTarget = true;
-            Debug.Log($"Bullet targeting obstacle: {_currentTarget.name}");
-        }
-        else if (_target != null)
-        {
-            _currentTarget = _target.transform;
-            _hasObstacleTarget = false;
-            Debug.Log("Bullet targeting target");
         }
         else
         {
-            _currentTarget = null;
+            _currentTarget = _target.transform;
             _hasObstacleTarget = false;
-            Debug.LogWarning("No target available for bullet");
         }
     }
     
     private void Update()
     {
         if (!_isActive) return;
+        
         MoveTowardsTarget();
-
+        
         _lifeTimer += Time.deltaTime;
         if (_lifeTimer >= _lifetime)
         {
@@ -128,32 +92,23 @@ public class Bullet : MonoBehaviour, IPoolable<IMemoryPool>
     {
         if (_currentTarget == null)
         {
+
             transform.Translate(Vector3.up * speed * Time.deltaTime);
             return;
         }
         
-        if (_hasObstacleTarget)
-        {
-            Vector3 direction = (_currentTarget.position - transform.position).normalized;
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
-            Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            transform.rotation = Quaternion.Slerp(
-                transform.rotation, 
-                targetRotation, 
-                rotationSpeed * Time.deltaTime
-            );
-        }
-        else
-        {
-            Vector3 direction = (_currentTarget.position - transform.position).normalized;
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
-            Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            transform.rotation = Quaternion.Slerp(
-                transform.rotation, 
-                targetRotation, 
-                rotationSpeed * 0.5f * Time.deltaTime
-            );
-        }
+
+        Vector3 direction = (_currentTarget.position - transform.position).normalized;
+        
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+        Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        transform.rotation = Quaternion.Slerp(
+            transform.rotation, 
+            targetRotation, 
+            rotationSpeed * Time.deltaTime
+        );
+        
 
         transform.Translate(Vector3.up * speed * Time.deltaTime);
     }
@@ -162,13 +117,10 @@ public class Bullet : MonoBehaviour, IPoolable<IMemoryPool>
     {
         if (!_isActive) return;
         
-        Debug.Log($"Bullet trigger with: {other.name}");
-        
         DestructibleObstacle obstacle = other.GetComponent<DestructibleObstacle>();
         if (obstacle != null)
         {
-            Debug.Log($"Hit obstacle: {obstacle.name}");
-            obstacle.TakeDamage(damage);
+            obstacle.TakeDamage(1f);
         }
         
         Despawn();
@@ -179,15 +131,6 @@ public class Bullet : MonoBehaviour, IPoolable<IMemoryPool>
         if (_isActive)
         {
             _isActive = false;
-            
-            var collider = GetComponent<Collider2D>();
-            if (collider != null)
-            {
-                collider.enabled = false;
-            }
-
-            gameObject.SetActive(false);
-            
             _pool.Despawn(this);
         }
     }

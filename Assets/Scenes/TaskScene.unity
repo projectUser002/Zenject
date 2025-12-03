@@ -711,6 +711,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Obstacle (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 297503645950176739, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
+      propertyPath: m_SortingOrder
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 1204433645958853228, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_Distance
       value: 0.88774073
@@ -730,6 +734,10 @@ PrefabInstance:
     - target: {fileID: 3548611244076106863, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_ConnectedAnchor.y
       value: -0.167
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055001518098597822, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
+      propertyPath: m_Distance
+      value: 1.0755857
       objectReference: {fileID: 0}
     - target: {fileID: 4531664741894812033, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_Distance
@@ -777,11 +785,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6290986720009267265, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_Distance
-      value: 0.92560434
+      value: 0.92560506
       objectReference: {fileID: 0}
     - target: {fileID: 7756554743109030612, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_Distance
-      value: 0.88774073
+      value: 0.88774025
       objectReference: {fileID: 0}
     - target: {fileID: 7812520995014147973, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_Distance
@@ -1189,6 +1197,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Obstacle (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 297503645950176739, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
+      propertyPath: m_SortingOrder
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 1114321375126619809, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_Distance
       value: 0.8877405
@@ -1215,7 +1227,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4055001518098597822, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_Distance
-      value: 1.0755851
+      value: 1.0755857
       objectReference: {fileID: 0}
     - target: {fileID: 4531664741894812033, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_Distance
@@ -1267,7 +1279,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7756554743109030612, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_Distance
-      value: 0.8877405
+      value: 0.88774025
       objectReference: {fileID: 0}
     - target: {fileID: 7812520995014147973, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_Distance
@@ -1533,6 +1545,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Obstacle (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 297503645950176739, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
+      propertyPath: m_SortingOrder
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 1114321375126619809, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_Distance
       value: 0.8877404
@@ -1559,7 +1575,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4055001518098597822, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_Distance
-      value: 1.0755848
+      value: 1.0755855
       objectReference: {fileID: 0}
     - target: {fileID: 4531664741894812033, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_Distance
@@ -1611,7 +1627,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7756554743109030612, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_Distance
-      value: 0.8877404
+      value: 0.88774025
       objectReference: {fileID: 0}
     - target: {fileID: 7812520995014147973, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_Distance
@@ -1765,6 +1781,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c5956195556e854fa038fe2349ce5d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &810795290
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 810795291}
+  m_Layer: 0
+  m_Name: TargetSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &810795291
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 810795290}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -26.160002, y: -5.11, z: 0.036753908}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &905072048
 GameObject:
   m_ObjectHideFlags: 0
@@ -2174,6 +2221,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Obstacle
       objectReference: {fileID: 0}
+    - target: {fileID: 297503645950176739, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
+      propertyPath: m_SortingOrder
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 1204433645958853228, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_Distance
       value: 0.88774073
@@ -2193,6 +2244,10 @@ PrefabInstance:
     - target: {fileID: 3548611244076106863, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_ConnectedAnchor.y
       value: -0.167
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055001518098597822, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
+      propertyPath: m_Distance
+      value: 1.0755856
       objectReference: {fileID: 0}
     - target: {fileID: 4531664741894812033, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_Distance
@@ -2240,11 +2295,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6290986720009267265, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_Distance
-      value: 0.92560446
+      value: 0.92560434
       objectReference: {fileID: 0}
     - target: {fileID: 7756554743109030612, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_Distance
-      value: 0.8877406
+      value: 0.88774043
       objectReference: {fileID: 0}
     - target: {fileID: 7812520995014147973, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_Distance
@@ -2275,6 +2330,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Obstacle (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 297503645950176739, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
+      propertyPath: m_SortingOrder
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 1114321375126619809, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_Distance
       value: 0.88774085
@@ -2301,7 +2360,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4055001518098597822, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_Distance
-      value: 1.0755851
+      value: 1.0755857
       objectReference: {fileID: 0}
     - target: {fileID: 4531664741894812033, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_Distance
@@ -2353,7 +2412,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7756554743109030612, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_Distance
-      value: 0.88774085
+      value: 0.88774055
       objectReference: {fileID: 0}
     - target: {fileID: 7812520995014147973, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_Distance
@@ -2545,6 +2604,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Obstacle (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 297503645950176739, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
+      propertyPath: m_SortingOrder
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 1114321375126619809, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_Distance
       value: 0.88774085
@@ -2571,7 +2634,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4055001518098597822, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_Distance
-      value: 1.075585
+      value: 1.0755857
       objectReference: {fileID: 0}
     - target: {fileID: 4531664741894812033, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_Distance
@@ -2623,7 +2686,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7756554743109030612, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_Distance
-      value: 0.88774085
+      value: 0.88774055
       objectReference: {fileID: 0}
     - target: {fileID: 7812520995014147973, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_Distance
@@ -2645,6 +2708,10 @@ PrefabInstance:
     - target: {fileID: 91586514723079804, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_Name
       value: Obstacle (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 297503645950176739, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
+      propertyPath: m_SortingOrder
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1114321375126619809, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_Distance
@@ -2672,7 +2739,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4055001518098597822, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_Distance
-      value: 1.075585
+      value: 1.0755857
       objectReference: {fileID: 0}
     - target: {fileID: 4531664741894812033, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_Distance
@@ -2724,7 +2791,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7756554743109030612, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_Distance
-      value: 0.88774055
+      value: 0.88774025
       objectReference: {fileID: 0}
     - target: {fileID: 7812520995014147973, guid: e80588b1c314db74a8cab673cbb94aaf, type: 3}
       propertyPath: m_Distance
@@ -4509,7 +4576,9 @@ MonoBehaviour:
   panelView: {fileID: 684021631}
   playerPrefab: {fileID: 8833310091317252692, guid: 62cc82a2d9fc24b45b69ad86a0f1a403, type: 3}
   playerSpawnPoint: {fileID: 191994863}
-  bulletPrefab: {fileID: 6587472139753052988, guid: e045651035016204cb9b430e26e65f69, type: 3}
+  bulletPrefab: {fileID: 2332614231796480022, guid: e045651035016204cb9b430e26e65f69, type: 3}
+  targetPrefab: {fileID: 4151934492117851712, guid: deaa62fe8be8c8542a3832180863ac51, type: 3}
+  targetSpawnPoint: {fileID: 810795291}
   sceneObstacles:
   - {fileID: 804543244}
   - {fileID: 134668409}
@@ -4781,6 +4850,7 @@ SceneRoots:
   - {fileID: 1226944904}
   - {fileID: 27025535}
   - {fileID: 191994863}
+  - {fileID: 810795291}
   - {fileID: 2042332659}
   - {fileID: 2003215645}
   - {fileID: 1184227710}

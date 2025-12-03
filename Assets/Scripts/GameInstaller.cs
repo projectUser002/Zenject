@@ -20,6 +20,10 @@ public class GameInstaller : MonoInstaller
     [Header("Bullet")]
     [SerializeField] private Bullet bulletPrefab;
 
+    [Header("Target")]
+    [SerializeField] private Target targetPrefab;
+    [SerializeField] private Transform targetSpawnPoint;
+
     [Header("Obstacles")]
     [SerializeField] private DestructibleObstacle[] sceneObstacles;
 
@@ -49,13 +53,16 @@ public class GameInstaller : MonoInstaller
             .AsSingle()
             .NonLazy();
 
-        Container.BindMemoryPool<Bullet, Bullet.Pool>()
-            .WithInitialSize(20)
-            .FromComponentInNewPrefab(bulletPrefab)
-            .UnderTransformGroup("Bullets");
+        Container.Bind<Target>()
+            .FromComponentInNewPrefab(targetPrefab)
+            .WithGameObjectName("Target")
+            .UnderTransform(targetSpawnPoint)
+            .AsSingle()
+            .NonLazy();
 
-        Container.BindFactory<Bullet, Bullet.Factory>().FromPoolableMemoryPool<Bullet>(poolBinder =>
-            poolBinder.WithInitialSize(20)
+        Container.BindFactory<Bullet, Bullet.Factory>()
+            .FromMonoPoolableMemoryPool<Bullet>(pool => pool
+                .WithInitialSize(20)
                 .FromComponentInNewPrefab(bulletPrefab)
                 .UnderTransformGroup("Bullets"));
 

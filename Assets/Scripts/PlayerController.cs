@@ -14,17 +14,22 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float shootCooldown = 0.2f;
     
     private float _lastShootTime;
-    private Bullet.Pool _bulletPool;
+    private Bullet.Factory _bulletFactory;
     private ISoundPlayer _soundPlayer;
     private SignalBus _signalBus;
     private Rigidbody2D _rigidbody;
+    private Target _target;
     
     [Inject]
-    public void Construct(Bullet.Pool bulletPool, ISoundPlayer soundPlayer, SignalBus signalBus)
+    public void Construct(Bullet.Factory bulletFactory, ISoundPlayer soundPlayer, 
+                         SignalBus signalBus, Target target)
     {
-        _bulletPool = bulletPool;
+        _bulletFactory = bulletFactory;
         _soundPlayer = soundPlayer;
         _signalBus = signalBus;
+        _target = target;
+
+        _target.SetPlayer(transform);
     }
     
     private void Awake()
@@ -50,36 +55,23 @@ public class PlayerController : MonoBehaviour
     
     private void HandleMovement()
     {
-        // Получаем ввод
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         
-        // Создаем вектор движения
         Vector2 movement = new Vector2(horizontalInput, verticalInput);
         
-        // Нормализуем, если движение по диагонали быстрее
         if (movement.magnitude > 1f)
         {
             movement.Normalize();
         }
         
-        // Применяем скорость
         Vector2 velocity = movement * moveSpeed;
-        
-        // Учитываем коллизии через Rigidbody
         _rigidbody.velocity = velocity;
         
-        // Ограничиваем позицию в пределах экрана
         Vector3 clampedPosition = transform.position;
         clampedPosition.x = Mathf.Clamp(clampedPosition.x, -horizontalLimit, horizontalLimit);
         clampedPosition.y = Mathf.Clamp(clampedPosition.y, -verticalLimit, verticalLimit);
         transform.position = clampedPosition;
-        
-        // Альтернативный способ с MovePosition:
-        // Vector2 newPosition = _rigidbody.position + movement * moveSpeed * Time.fixedDeltaTime;
-        // newPosition.x = Mathf.Clamp(newPosition.x, -horizontalLimit, horizontalLimit);
-        // newPosition.y = Mathf.Clamp(newPosition.y, -verticalLimit, verticalLimit);
-        // _rigidbody.MovePosition(newPosition);
     }
     
     private void HandleShooting()
@@ -93,10 +85,12 @@ public class PlayerController : MonoBehaviour
     
     private void Shoot()
     {
-        Bullet bullet = _bulletPool.Spawn(_bulletPool);
+        Bullet bullet = _bulletFactory.Create();
         bullet.transform.position = bulletSpawnPoint.position;
         bullet.transform.rotation = bulletSpawnPoint.rotation;
-        bullet.Initialize(bulletLifetime , _bulletPool);
+
+        var pool = _bulletFactory as IMemoryPool<Bullet>;
+        bullet.Initialize(bulletLifetime, pool);
         
         _soundPlayer.PlayShootSound();
         _signalBus.Fire<PlayerShootSignal>();
